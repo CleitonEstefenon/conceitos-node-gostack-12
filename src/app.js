@@ -27,7 +27,7 @@ app.get("/repositories", (request, response) => {
   const { projectTitle } = request.query
 
   const searchProject = projectTitle
-    ? repositories.filter(repositories => project.title.icludes(projectTitle))
+    ? repositories.filter(repository => String(repository.title).includes(projectTitle))
     : repositories
 
   return response.status(200).send(searchProject)
@@ -35,7 +35,7 @@ app.get("/repositories", (request, response) => {
 
 //Rota para criar um novo project dentro de repositories.
 app.post("/repositories", (request, response) => {
-  const { ...data } = request.body;
+  const data = request.body;
 
   let identifier = uuid();
 
